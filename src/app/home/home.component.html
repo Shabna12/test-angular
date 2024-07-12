@@ -1,0 +1,49 @@
+<!-- nav bar -->
+<nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <i class="fa-solid fa-bowl-food fa-2xl" style="color: #FFD43B;"></i>
+       <b class="ms-3">RECIPE WORLD</b>
+      </a>
+    </div>
+</nav>
+<!-- heading + search -->
+<div class="container">
+    <div class="mt-5 d-flex justify-content-between">
+        <h3 class="fw-bolder"> RECIPES </h3>
+        <div class="d-flex align-items-center">
+            <span class="fw-bolder">Search</span>
+            <input  [(ngModel)]="searchKey" style="width: 500px;" type="search" class="form-control ms-3" placeholder="Search By Cuisine & Recipe Name">
+        </div>
+    </div>
+</div>
+<!-- cards -->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <div *ngFor="let recipe of allRecipes | paginate: { itemsPerPage:4, currentPage: p, totalItems: 30} | pipeSearch:searchKey">
+                <div class="card">
+                    <!-- Product image-->
+                    <img class="card-img-top" [src]="recipe.image" alt="..." />
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder"> </h5>
+                            <!-- Product price-->
+                           <h2> {{recipe.name}}</h2>
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <h6 class="text-danger">Cooking Time: {{recipe.prepTimeMinutes}} Minutes</h6>
+                        <h6 class="text-primary">Servings: {{recipe.servings}} persons</h6>
+                      <h5>Ingredients:</h5> <p>{{recipe.ingredients}}</p>
+                      <h5>Cuisine:</h5> <p>{{recipe.cuisine}}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="mt-2 text-center"> <pagination-controls (pageChange)="p = $event"></pagination-controls></div>
+</section>
