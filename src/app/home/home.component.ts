@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit{
 
   getRecipes(){
     this.api.getRecipesAPI().subscribe((result:any) => {
-      this.allRecipes = result
+      this.allRecipes = result.recipes
       console.log(this.allRecipes);
       
     })
